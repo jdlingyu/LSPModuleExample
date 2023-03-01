@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LSPModuleExample</string>
+    <string name="app_desc">A demo for an LSPosed module.</string>
+</resources>
