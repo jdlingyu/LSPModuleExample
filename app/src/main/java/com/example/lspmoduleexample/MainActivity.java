@@ -7,17 +7,21 @@ import android.widget.CheckBox;
 
 public class MainActivity extends AppCompatActivity {
 
+    CheckBox checkBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CheckBox checkBox = findViewById(R.id.tv_is_active);
+        checkBox = findViewById(R.id.tv_is_active);
 
-        checkBox.setChecked(isModuleActive());
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkBox.setChecked(isModuleActive());
+    }
 
     private static boolean isModuleActive() {
         int i = 0;

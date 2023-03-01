@@ -3,7 +3,11 @@ package com.example.xp;
 
 import com.example.lspmoduleexample.BuildConfig;
 
+import java.lang.reflect.Method;
+
 import androidx.annotation.NonNull;
+import de.robv.android.xposed.XC_MethodReplacement;
+import de.robv.android.xposed.XposedHelpers;
 import io.github.libxposed.api.XposedContext;
 import io.github.libxposed.api.XposedModule;
 /**
@@ -29,13 +33,25 @@ public class MainHook extends XposedModule {
         super.onPackageLoaded(param);
         final String targetPackage = param.getPackageName();
 
+        log(TAG + "enter -> " + targetPackage);
 
 
         if (targetPackage.equals(getAppPackage())) {
-//            de.robv.android.xposed.XposedHelpers.findAndHookMethod(getMainActName(), param.getClassLoader(),
-//                    "isModuleActive", de.robv.android.xposed.XC_MethodReplacement.returnConstant(true));
+            XposedHelpers.findAndHookMethod(getMainActName(), param.getClassLoader(),
+                    "isModuleActive", XC_MethodReplacement.returnConstant(true));
 
-            log(TAG + " isModuleActive()");
+//            Class<?> cls = XposedHelpers.findClass(getMainActName(), param.getClassLoader());
+//
+//            Method method = XposedHelpers.findMethodExactIfExists(cls, "isModuleActive");
+//            if (method != null) {
+//                hookAfter(method, callback -> {
+//
+//                    log(TAG + " isModuleActive()");
+//
+//                    callback.setResult(true);
+//
+//                });
+//            }
 
             return;
         }
